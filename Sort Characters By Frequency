@@ -1,0 +1,58 @@
+[Note the characters wuth the highest frequency comes first and then in a descending order of frequency]
+
+
+var frequencySort = function(s) {
+
+// Create a array of pairs to store character-frequency pairs
+// The ASCII code for 'a' is 97, and for 'z', it is 122. Therefore, creating an array 
+// of size 122 is intended to cover all lowercase letters from 'a' to 'z'
+const arr=[]
+ for (let i = 0; i <= 122; i++) {
+  arr.push([0, 0]);
+}
+
+//Counting the frequency of each character
+      for (let i = 0; i < s.length; i++) {
+//we start by taking in count each character one by one           
+        const currentChar = s[i];
+//then we store the ascii code for the current character inside a variable-> index       
+        const index = currentChar.charCodeAt();
+//Now we update the ASCII value of the current character in the arr that is used
+//to store character-frequency pairs         
+        arr[index][0] = currentChar.charCodeAt();
+// Now we increments the frequency count of the character at the specified index. 
+// This ensures that the data structure accurately reflects how many times each
+// character appears in the input string.
+        arr[index][1]++;
+    }
+
+//Now as we have our array storing the frequency of each character we can now Sort 
+// the array based on frequency in descending order
+    arr.sort((a, b) => b[1] - a[1]);
+
+// Construct the sorted string
+    let result = '';
+// We use a loop to go through the sorted list of characters, one by one.
+     for (let j = 0; j < arr.length; j++) {
+
+// then we extract the ASCII code of that current character in the array.         
+        const charCode = arr[j][0];
+
+// then we extract the second piece of information from the current inner array at 
+// index j while arr[j] gets the inner array.
+// [1] gets the second element of that inner array, which is the frequency.
+//and count holds the frequency of the current character in the loop.        
+        const count = arr[j][1];
+
+// String.fromCharCode(charCode) converts the ASCII code back to a character.
+// and we append it all into our empty result string hence we get a string with 
+// sorted characters by their frequency       
+        for (let k = 0; k < count; k++) {
+        result += String.fromCharCode(charCode);
+    }
+
+    }
+
+    return result;
+};
+//asked in google amazon zoho and big companies 
