@@ -1,0 +1,39 @@
+convert roman to integer 
+
+
+
+var romanToInt = function(s) {
+
+    // Create a map that associates each Roman numeral character with its numerical value
+    let map = {"I":1, "V":5, "X":10, "L":50, "C":100, "D":500, "M":1000}
+
+    // Initialize the result variable to store the final integer value
+    let result = 0;
+
+    // Iterate through each character in the input Roman numeral string
+    for(let i = 0; i < s.length; i++) {
+
+        // Access the character at the current index and get its numerical value from the map
+        let curr = map[s[i]];
+
+        // Access the next character's numerical value in the map
+        let next = map[s[i + 1]];
+
+        // Check if the current character is part of a subtraction case
+        if(curr < next) {
+            // If true, add the difference between next and curr to the result
+            result += next - curr;
+            // Increment the loop variable to skip the next character in the next iteration
+            i++;
+        } else {
+            // If false, add the value of the current character to the result
+            result += curr;
+        }
+    }
+
+    // Return the final integer result
+    return result;
+};
+
+
+};
