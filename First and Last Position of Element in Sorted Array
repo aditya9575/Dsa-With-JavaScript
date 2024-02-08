@@ -1,0 +1,66 @@
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+var searchRange = function(nums, target) {
+
+//we start by initializing the 1st and last index with the value of -1 as our 
+// indexing starts from 0 
+    let firstIndex = -1;
+    let lastIndex = -1;
+
+//Now we use Binary search for the first occurrence
+    let left = 0;
+    let right = nums.length - 1;
+    while (left <= right) {
+
+        let mid = Math.floor((left + right) / 2);
+
+        if (nums[mid] === target) {
+            //we found the index at mid 
+            firstIndex = mid;
+//we also want to continue searching on the left side of the array to find if
+//there are any more occurrences towards the beginning of the array. Therefore, we 
+//update right to mid - 1 to narrow the search space to the left side of the current
+//mid.
+            right = mid - 1; 
+        }
+        //searching on the right part 
+         else if (nums[mid] < target) {
+            left = mid + 1;
+        }
+        //searching on the left part
+         else {
+            right = mid - 1;
+        }
+
+    }
+
+//Now we use Binary search for the last occurrence
+    left = 0;
+    right = nums.length - 1;
+    while (left <= right) {
+        
+        let mid = Math.floor((left + right) / 2);
+       
+        if (nums[mid] === target) {
+            //we found the index at mid 
+            lastIndex = mid;
+//we also want to continue searching on the left side of the array to find if
+//there are any more occurrences towards the beginning of the array. Therefore, we 
+//update left to mid + 1 to narrow the search space to the left side of the current mid.            
+            left = mid + 1; 
+        }
+        //searching on the right side 
+        else if (nums[mid] < target) {
+            left = mid + 1;
+        } 
+        // searching on the left side 
+        else {
+            right = mid - 1;
+        }
+    }
+
+    return [firstIndex, lastIndex];
+};
